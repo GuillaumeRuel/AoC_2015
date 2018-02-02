@@ -7,7 +7,7 @@ class AoC6:
         self.puzzle = open('data\day6.txt').read().split('\n')
         for y in xrange(1000):
             for x in range(1000):
-                self.grid[(x,y)] = '0'
+                self.grid[(x,y)] = 0
     
         self.solve()
     
@@ -15,19 +15,20 @@ class AoC6:
         for y in xrange(yi, yf + 1):
             for x in xrange(xi, xf + 1):
                 t = (x, y)
-                self.grid[t] = '1'
+                self.grid[t] += 1
 
     def turn_off(self, xi, yi, xf, yf):
         for y in xrange(yi, yf + 1):
             for x in xrange(xi, xf + 1):
                 t = (x, y)
-                self.grid[t] = '0'
+                if self.grid[t] > 0:
+                    self.grid[t] -= 1
 
     def toggle(self, xi, yi, xf, yf):
         for y in xrange(yi, yf + 1):
             for x in xrange(xi, xf + 1):
                 t = (x, y)
-                self.grid[t] = '0' if self.grid[t] == '1' else '1'
+                self.grid[t] += 2
 
     def solve(self):    
         for line in self.puzzle:
